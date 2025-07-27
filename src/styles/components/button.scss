@@ -1,0 +1,33 @@
+.btn {
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: 100%;
+  border: 1px solid;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &--default {
+    background-color: #39cdcc;
+    border-color: #39cdcc;
+    color: #fff;
+  }
+
+  &--outlined {
+    background-color: transparent;
+    color: #545f7d;
+    border-color: #545f7d;
+  }
+
+  &--danger-outlined {
+    background-color: transparent;
+    color: #e4033b;
+    border-color: #e4033b;
+  }
+
+  &--colored-outlined {
+    background-color: transparent;
+    color: #39cdcc;
+    border-color: #39cdcc;
+  }
+}

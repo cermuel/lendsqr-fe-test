@@ -1,0 +1,23 @@
+.layout {
+  display: flex;
+  height: 100dvh;
+  width: 100vw;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top: 100px;
+}
+
+.children {
+  flex: 1;
+  overflow-y: auto;
+  padding: 50px;
+  background-color: #fbfbfb;
+  @media screen and (max-width: 768px) {
+    padding: 20px;
+  }
+}

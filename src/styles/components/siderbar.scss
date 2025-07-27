@@ -1,0 +1,107 @@
+.sidebar {
+  width: 280px;
+  background-color: #ffffff;
+  height: 100vh;
+  transition: transform 0.3s ease-in-out;
+  z-index: 20;
+  overflow: hidden;
+  box-shadow: 0.5px 1px 0px 0px #0000000a;
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &.open {
+    @media (max-width: 768px) {
+      transform: translateX(0);
+    }
+  }
+
+  &__header {
+    height: 100px;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__logo {
+    height: 2rem;
+  }
+
+  &__orgBtn {
+    width: 100%;
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+
+    span {
+      color: #213f7d;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: calc(100vh - 148px);
+    padding-bottom: 3.5rem;
+  }
+
+  &__section {
+    margin-top: 1.5rem;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  &__headerR {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #545f7d;
+    padding-left: 1.5rem;
+    width: 100%;
+    padding-top: 0;
+  }
+
+  &__link {
+    width: 100%;
+    color: #213f7d;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 1.5rem;
+    height: 2.5rem;
+    align-items: center;
+    opacity: 0.6;
+
+    &.active {
+      background-color: rgba(57, 205, 204, 0.06);
+      border-left: 3px solid #39cdcc;
+      opacity: 1;
+    }
+
+    span {
+      color: #213f7d;
+    }
+  }
+}
+
+.mobileClose {
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}

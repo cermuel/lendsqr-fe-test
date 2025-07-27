@@ -1,0 +1,106 @@
+.navbar {
+  height: 100px;
+  background-color: #ffffff;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+  padding: 0 2rem;
+  width: 100vw;
+  box-shadow: 3px 0px 20px 0px #0000000a;
+
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+    z-index: 0;
+  }
+}
+
+.menuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 1rem;
+}
+
+.logo {
+  width: 480px;
+  height: 30px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  img {
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+  }
+}
+
+.docs-link {
+  text-decoration: underline;
+  color: #213f7d;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.bell-icon {
+  height: auto;
+
+  @media (max-width: 768px) {
+    height: 20px;
+  }
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 48px;
+
+  @media (max-width: 768px) {
+    height: 40px;
+  }
+
+  .avatar {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+
+  .username {
+    font-weight: 500;
+    color: #213f7d;
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem;
+    }
+  }
+
+  .dropdown-icon {
+    height: auto;
+  }
+}

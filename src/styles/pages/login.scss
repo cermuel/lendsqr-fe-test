@@ -1,0 +1,75 @@
+.login {
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
+  position: relative;
+
+  &__logo {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    width: 120px;
+    @media (max-width: 768px) {
+      left: 40px;
+      top: 40px;
+    }
+  }
+
+  &__left {
+    width: 50%;
+    background-color: #fdfdfd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__image {
+    width: 80%;
+  }
+
+  &__right {
+    width: 50%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 40px;
+    }
+  }
+
+  &__form {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  &__span {
+    color: #39cdcc;
+    font-size: 12px;
+    letter-spacing: 10%;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  &__header {
+    font-size: 40px;
+    color: #213f7d;
+    font-weight: bold;
+    line-height: 100%;
+    letter-spacing: -4%;
+    padding-bottom: 5px;
+  }
+  &__header2 {
+    color: #545f7d;
+    font-size: 20px;
+    font-weight: 400;
+  }
+}

@@ -6,6 +6,7 @@
   width: 100%;
   border: 1px solid;
   transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 
   &--default {
     background-color: #39cdcc;

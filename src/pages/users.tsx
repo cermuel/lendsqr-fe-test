@@ -11,23 +11,98 @@ import { formatDateTime } from "../utils/helpers";
 import Paginator from "../components/ui/paginator";
 import { useState } from "react";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { Dropdown } from "../components/ui/dropdown";
+import FilterInput from "../components/ui/input-filter";
+import Button from "../components/shared/button";
+import { useNavigate } from "react-router-dom";
 
+const headers = [
+  "Organization",
+  "username",
+  "email",
+  "phone number",
+  "date joined",
+  "status",
+];
 const Users = () => {
-  const headers = [
-    "Organization",
-    "username",
-    "email",
-    "phone number",
-    "date joined",
-    "status",
-  ];
+  const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(100);
 
+  const [filterDrafts, setFilterDrafts] = useState({
+    organization: "",
+    username: "",
+    email: "",
+    date: "",
+    phoneNumber: 0,
+    status: "",
+  });
+
+  const [filters, setFilters] = useState({
+    organization: "",
+    username: "",
+    email: "",
+    date: "",
+    phoneNumber: 0,
+    status: "",
+  });
+
+  const resetFilter = () => {
+    setFilterDrafts({
+      organization: "",
+      username: "",
+      email: "",
+      date: "",
+      phoneNumber: 0,
+      status: "",
+    });
+    setFilters({
+      organization: "",
+      username: "",
+      email: "",
+      date: "",
+      phoneNumber: 0,
+      status: "",
+    });
+  };
   const totalEntries = users.length;
 
-  const displayedUsers = users.slice(
+  const filteredUsers = users.filter((user) => {
+    const matchOrg = filters.organization
+      ? user.organization
+          .toLowerCase()
+          .includes(filters.organization.toLowerCase())
+      : true;
+    const matchUsername = filters.username
+      ? `${user.firstName} ${user.lastName}`
+          .toLowerCase()
+          .includes(filters.username.toLowerCase())
+      : true;
+    const matchEmail = filters.email
+      ? user.email.toLowerCase().includes(filters.email.toLowerCase())
+      : true;
+    const matchPhone = filters.phoneNumber
+      ? user.phoneNumber.toString().includes(filters.phoneNumber.toString())
+      : true;
+    const matchDate = filters.date
+      ? new Date(user.dateJoined).toISOString().slice(0, 10) === filters.date
+      : true;
+    const matchStatus = filters.status
+      ? user.status.toLowerCase() === filters.status.toLowerCase()
+      : true;
+
+    return (
+      matchOrg &&
+      matchUsername &&
+      matchEmail &&
+      matchPhone &&
+      matchDate &&
+      matchStatus
+    );
+  });
+
+  const paginatedUsers = filteredUsers.slice(
     (currentPage - 1) * entriesPerPage,
     currentPage * entriesPerPage
   );
@@ -59,25 +134,100 @@ const Users = () => {
                     </PopoverButton>
                     <PopoverPanel
                       anchor="bottom"
-                      className="absolute flex flex-col items-center justify-center z-10 mt-2 right-0 w-[270px] h-[130px] rounded-lg bg-[#fff] p-2 border border-[#545F7D0A] transition duration-200 ease-in-out"
+                      className="flex flex-col gap-4 items-center py-6 justify-center z-10 mt-2 w-[270px] rounded-lg bg-[#fff] border border-[#545F7D0A] transition duration-200 ease-in-out"
                     >
-                      <div
-                        className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
-                      >
-                        <img src="/icons/eye.svg" alt="eye icon" />
-                        View Details
-                      </div>
-                      <div
-                        className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
-                      >
-                        <img src="/icons/blacklist.svg" alt="eye icon" />
-                        Blacklist User
-                      </div>
-                      <div
-                        className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
-                      >
-                        <img src="/icons/activate.svg" alt="eye icon" />
-                        Activate User
+                      <Dropdown
+                        label="Organization"
+                        options={[
+                          { label: "Lendsqr", value: "lendsqr" },
+                          { label: "Lendstar", value: "lendstar" },
+                          {
+                            label: "Irorun",
+                            value: "irorun",
+                          },
+                        ]}
+                        onSelect={(option) =>
+                          setFilterDrafts({
+                            ...filterDrafts,
+                            organization: option.value.toString(),
+                          })
+                        }
+                      />
+                      <FilterInput
+                        label="Username"
+                        value={filterDrafts.username}
+                        onChange={(e) => {
+                          setFilterDrafts({
+                            ...filterDrafts,
+                            username: e.target.value,
+                          });
+                        }}
+                        placeholder="Username"
+                      />
+                      <FilterInput
+                        label="Email"
+                        value={filterDrafts.email}
+                        onChange={(e) => {
+                          setFilterDrafts({
+                            ...filterDrafts,
+                            email: e.target.value,
+                          });
+                        }}
+                        placeholder="Email"
+                      />
+
+                      <FilterInput
+                        label="Date"
+                        value={filterDrafts.date}
+                        onChange={(e) => {
+                          setFilterDrafts({
+                            ...filterDrafts,
+                            date: e.target.value,
+                          });
+                        }}
+                        type="date"
+                        placeholder="Date"
+                      />
+                      <FilterInput
+                        label="Phone Number"
+                        value={filterDrafts.phoneNumber}
+                        onChange={(e) => {
+                          setFilterDrafts({
+                            ...filterDrafts,
+                            phoneNumber: Number(e.target.value),
+                          });
+                        }}
+                        placeholder="Phone Number"
+                        type="number"
+                      />
+                      <Dropdown
+                        label="Status"
+                        options={[
+                          { label: "Active", value: "active" },
+                          { label: "Inactive", value: "inactive" },
+                          {
+                            label: "Pending",
+                            value: "pending",
+                          },
+                          {
+                            label: "Blacklisted",
+                            value: "blacklisted",
+                          },
+                        ]}
+                        onSelect={(option) =>
+                          setFilterDrafts({
+                            ...filterDrafts,
+                            status: option.value.toString(),
+                          })
+                        }
+                      />
+                      <div className="flex items-center gap-2 w-[230px]">
+                        <Button onClick={resetFilter} variant="outlined">
+                          Reset
+                        </Button>
+                        <Button onClick={() => setFilters(filterDrafts)}>
+                          Filter
+                        </Button>
                       </div>
                     </PopoverPanel>
                   </Popover>
@@ -87,7 +237,7 @@ const Users = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {displayedUsers.map((user, i) => (
+          {paginatedUsers.map((user, i) => (
             <TableRow key={i}>
               <TableColumn>
                 <span className="capitalize">{user.organization}</span>
@@ -114,12 +264,13 @@ const Users = () => {
                     anchor="bottom end"
                     className="absolute flex flex-col items-center justify-center z-10 mt-2 right-0 w-[180px] h-[130px] rounded-lg bg-[#fff] p-2 border border-[#545F7D0A] transition duration-200 ease-in-out"
                   >
-                    <div
+                    <button
                       className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
+                      onClick={() => navigate(`/users/${user.id}`)}
                     >
                       <img src="/icons/eye.svg" alt="eye icon" />
                       View Details
-                    </div>
+                    </button>
                     <div
                       className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
                     >

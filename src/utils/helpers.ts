@@ -1,7 +1,7 @@
-export function formatDateTime(
+export const formatDateTime = (
   input: string,
   defaultTime = "10:00:00"
-): string {
+): string => {
   let date: Date;
 
   if (/^\d{4}-\d{2}-\d{2}$/.test(input)) {
@@ -18,4 +18,12 @@ export function formatDateTime(
     minute: "2-digit",
     hour12: true,
   });
-}
+};
+
+export const formatNaira = (amount: number): string => {
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
+    minimumFractionDigits: 2,
+  }).format(amount);
+};

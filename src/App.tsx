@@ -7,6 +7,7 @@ import type { RootState } from "./services/store";
 import Login from "./pages/login";
 import Layout from "./components/shared/layout";
 import Users from "./pages/users";
+import UserDetails from "./pages/userDetails";
 
 function App() {
   const isLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn);
@@ -21,6 +22,7 @@ function App() {
       {isLoggedIn && (
         <Route path="/" element={<Layout />}>
           <Route path="users" element={<Users />} />
+          <Route path="users/:userId" element={<UserDetails />} />
         </Route>
       )}
 

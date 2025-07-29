@@ -1,0 +1,146 @@
+.users-page {
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: scroll;
+}
+
+.users-header {
+  width: 100%;
+}
+
+.users-header h1 {
+  font-weight: 500;
+  color: #213f7d;
+  font-size: 1.5rem;
+}
+
+.extra-grid {
+  width: 100%;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.header-cell {
+  padding-right: 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.header-cell.wide {
+  padding-right: 10rem;
+}
+
+.filter-button {
+  outline: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  cursor: pointer;
+}
+
+.filter-button img {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-top: 0.125rem;
+}
+
+.filter-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  justify-content: center;
+  z-index: 10;
+  margin-top: 0.5rem;
+  width: 270px;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(84, 95, 125, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 230px;
+}
+
+.more-button {
+  outline: none;
+  cursor: pointer;
+}
+
+.actions-panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin-top: 0.5rem;
+  right: 0;
+  width: 180px;
+  height: 130px;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  border: 1px solid rgba(84, 95, 125, 0.04);
+}
+
+.actions-panel button,
+.actions-panel div {
+  display: flex;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #545f7d;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.actions-panel button:hover,
+.actions-panel div:hover {
+  background-color: #fbfbfb;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.status-pill.active {
+  background-color: #39cdcc;
+}
+
+.status-pill.inactive {
+  background-color: #545f7d;
+}
+
+.status-pill.pending {
+  background-color: #e9b200;
+}
+
+.status-pill.blacklisted {
+  background-color: #e4033b;
+}

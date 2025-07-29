@@ -1,11 +1,15 @@
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import Button from "../components/shared/button";
+import Seperator from "../components/ui/seperator";
 
 import users from "../data/data.json";
-import { useEffect, useState } from "react";
-import Seperator from "../components/ui/seperator";
-import { formatNaira } from "../utils/helpers";
 import Detail from "../components/ui/detail";
+
+import { formatNaira } from "../utils/helpers";
+
+import "../styles/pages/user-details.scss";
 
 const tabs = [
   "General Details",
@@ -31,38 +35,35 @@ const UserDetails = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col gap-6 overflow-y-scroll">
-      <button
-        onClick={() => navigate("/users")}
-        className="flex items-center gap-2 cursor-pointer"
-      >
+    <div className="user-details">
+      <button onClick={() => navigate("/users")} className="back-button">
         <img src="/icons/arrow-back.svg" alt="arrow icon" />
-        <span className="text-[#545F7D]">Back to Users</span>
+        <span>Back to Users</span>
       </button>
-      <div className="w-full flex items-center justify-between flex-wrap">
-        <h1 className="font-medium text-[#213F7D] text-2xl">Users</h1>
-        <div className="flex items-center gap-4 max-w-[400px] w-full">
+      <div className="header">
+        <h1>Users</h1>
+        <div className="action-buttons">
           <Button variant="colored-outlined">BLACKLIST USER</Button>
           <Button variant="danger-outlined">ACTIVATE USER</Button>
         </div>
       </div>
 
-      <div className="w-full p-6 pb-0 bg-white border border-[#213F7D0F]">
-        <div className="flex md:h-[100px] flex-wrap md:flex-nowrap md:items-center items-start gap-6 py-1">
-          <img src="/images/avatar-2.svg" alt="" className="w-20 h-20" />
+      <div className="profile-card">
+        <div className="profile-header">
+          <img src="/images/avatar-2.svg" alt="avatar" />
 
-          <div className="flex flex-col">
-            <h1 className="text-[22px] text-[#213F7D] font-medium">
+          <div className="user-info">
+            <h1>
               {user?.firstName} {user?.lastName}
             </h1>
-            <span className="text-sm text-[#545F7D]">{user?.id}</span>
+            <span>{user?.id}</span>
           </div>
 
           <Seperator />
 
-          <div className="flex flex-col gap-1">
-            <p className="text-sm text-[#545F7D] font-medium">User's Tier</p>
-            <div className="flex items-center gap-[1px]">
+          <div className="user-tier">
+            <p>User's Tier</p>
+            <div className="stars">
               <img src="/icons/star-filled.svg" alt="star filled icon" />
               <img src="/icons/star.svg" alt="star icon" />
               <img src="/icons/star.svg" alt="star icon" />
@@ -71,27 +72,19 @@ const UserDetails = () => {
 
           <Seperator />
 
-          <div className="flex flex-col">
-            <h1 className="text-[22px] text-[#213F7D] font-medium">
-              {formatNaira(Number(user?.minIncome.toFixed(0)) ?? 0)}
-            </h1>
-            <span className="text-xs text-[#213F7D]">
-              9912345678/Providus Bank
-            </span>
+          <div className="bank-details">
+            <h1>{formatNaira(Number(user?.minIncome.toFixed(0)) ?? 0)}</h1>
+            <span>9912345678/Providus Bank</span>
           </div>
         </div>
 
-        <div className="w-full overflow-x-auto mt-10">
-          <div className="flex items-end min-w-max md:min-w-full w-full gap-10 md:gap-4">
+        <div className="tabs">
+          <div className="tab-list">
             {tabs.map((tab, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedTab(tab)}
-                className={`flex-shrink-0 md:flex-1 pb-2 border-b-2 text-sm whitespace-nowrap ${
-                  tab === selectedTab
-                    ? "border-b-[#39CDCC] text-[#39CDCC]"
-                    : "text-[#000000CC] border-b-white"
-                }`}
+                className={`${tab === selectedTab ? "active" : ""}`}
               >
                 {tab}
               </button>
@@ -99,12 +92,10 @@ const UserDetails = () => {
           </div>
         </div>
       </div>
-      <div className="w-full p-6 space-y-7 bg-white border border-[#213F7D0F]">
-        <div className="w-full">
-          <h1 className="font-medium text-[#213F7D] mb-6">
-            Personal Information
-          </h1>
-          <div className="w-full grid gap-y-5 lg:grid-cols-4 xl:grid-cols-5 grid-cols-2">
+      <div className="user-details-body">
+        <div className="section">
+          <h1>Personal Information</h1>
+          <div className="details-grid">
             <Detail
               label="full name"
               value={`${user?.firstName} ${user?.lastName}`}

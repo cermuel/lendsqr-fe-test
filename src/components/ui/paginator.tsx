@@ -1,4 +1,5 @@
 import React from "react";
+import "../../styles/components/paginator.scss";
 
 interface PaginatorProps {
   totalEntries: number;
@@ -48,9 +49,7 @@ const Paginator: React.FC<PaginatorProps> = ({
         <button
           key={item}
           onClick={() => onChangePage(item)}
-          className={`px-1 text-[#545F7D] cursor-pointer rounded-md ${
-            item === currentPage ? "font-medium" : ""
-          }`}
+          className={`page-button ${item === currentPage ? "active" : ""}`}
         >
           {item}
         </button>
@@ -59,34 +58,28 @@ const Paginator: React.FC<PaginatorProps> = ({
   };
 
   return (
-    <div className="flex justify-between items-center text-sm text-gray-700 mt-0">
-      <div className="flex items-center gap-2">
-        <span className="max-sm:hidden">Showing</span>
+    <div className="paginator">
+      <div className="entries-control">
+        <span className="entries-label">Showing</span>
         <select
           value={entriesPerPage}
           onChange={(e) => onChangeEntriesPerPage(Number(e.target.value))}
-          className="h-[30px] cursor-pointer w-[80px] flex items-center outline-none justify-between px-2 bg-[#213F7D1A] rounded-[4px] border text-sm border-gray-300 text-[#213F7D] font-medium"
+          className="entries-select"
         >
           {[10, 25, 50, 100].map((num) => (
             <option key={num} value={num}>
-              <span> {num}</span>
-
-              <img
-                src="/icons/down-colored.svg"
-                className="w-2 h-2 border-2 mr-2"
-                alt="down icon"
-              />
+              {num}
             </option>
           ))}
         </select>
         <span>out of {totalEntries}</span>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="pagination-controls">
         <button
           onClick={() => onChangePage(currentPage - 1)}
           disabled={currentPage === 1}
-          className="w-6 h-6 bg-[#213F7D1A] cursor-pointer hover:bg-blue-100 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+          className="arrow-button"
         >
           &lt;
         </button>
@@ -94,7 +87,7 @@ const Paginator: React.FC<PaginatorProps> = ({
         <button
           onClick={() => onChangePage(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="w-6 h-6 bg-[#213F7D1A] cursor-pointer hover:bg-blue-100 rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+          className="arrow-button"
         >
           &gt;
         </button>

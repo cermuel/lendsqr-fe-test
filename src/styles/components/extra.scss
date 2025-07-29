@@ -1,0 +1,26 @@
+.extra {
+  background-color: white;
+  border: 1px solid #213f7d0f;
+  border-radius: 4px;
+  box-shadow: 3px 5px 20px 0px #0000000a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+
+  .title {
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #545f7d;
+  }
+
+  .value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #213f7d;
+  }
+  .img {
+    width: 40px;
+  }
+}

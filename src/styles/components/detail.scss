@@ -1,0 +1,23 @@
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-right: 1.5rem;
+
+  &__label {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #545f7d;
+  }
+
+  &__value {
+    font-weight: 500;
+    color: #545f7d;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+  }
+}

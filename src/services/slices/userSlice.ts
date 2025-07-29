@@ -7,7 +7,7 @@ interface UserState {
 
 const initialState: UserState = {
   email: "",
-  isLoggedIn: true,
+  isLoggedIn: false,
 };
 
 const userSlice = createSlice({

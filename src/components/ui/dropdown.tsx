@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-// optional: or use inline SVG
+import "../../styles/components/dropdown.scss";
 
 type Option = {
   label: string;
@@ -44,18 +44,18 @@ export const Dropdown: React.FC<DropdownProps> = ({
   };
 
   return (
-    <div ref={ref} className="relative w-[230px]">
-      <label className="text-[#545F7D] text-sm font-medium">{label}</label>
+    <div ref={ref} className="dropdown">
+      <label className="dropdown__label">{label}</label>
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        className="w-full bg-white cursor-pointer border border-[#213F7D4A] h-10 rounded-lg px-4 py-2 flex items-center justify-between text-left hover:border-gray-400 focus:outline-none"
+        className="dropdown__button"
       >
-        <span className="truncate text-sm text-gray-700">
+        <span className="dropdown__selected">
           {current?.label || placeholder}
         </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 text-gray-500"
+          className="dropdown__icon"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -70,12 +70,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
       </button>
 
       {isOpen && (
-        <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto">
+        <ul className="dropdown__options">
           {options.map((option) => (
             <li
               key={option.value}
               onClick={() => handleSelect(option)}
-              className="px-4 py-2 cursor-pointer text-sm hover:bg-gray-100 text-gray-700"
+              className="dropdown__option"
             >
               {option.label}
             </li>

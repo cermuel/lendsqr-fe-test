@@ -1,14 +1,15 @@
+import "../../styles/components/detail.scss";
+
 interface DetailProps {
   label: string;
   value: string;
 }
+
 const Detail = ({ label, value }: DetailProps) => {
   return (
-    <div className="flex flex-col gap-1 items-start justify-start pr-6">
-      <span className="text-xs text-[#545F7D] uppercase">{label}</span>
-      <span className="font-medium text-[#545F7D] truncate w-full overflow-hidden">
-        {value}
-      </span>
+    <div className="detail">
+      <span className="detail__label">{label}</span>
+      <span className="detail__value">{value}</span>
     </div>
   );
 };

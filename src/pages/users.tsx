@@ -16,6 +16,7 @@ import FilterInput from "../components/ui/input-filter";
 import Button from "../components/shared/button";
 import { useNavigate } from "react-router-dom";
 import Extra from "../components/ui/extra";
+import "../styles/pages/users.scss";
 
 const headers = [
   "Organization",
@@ -108,11 +109,11 @@ const Users = () => {
     currentPage * entriesPerPage
   );
   return (
-    <div className="w-full h-max flex overflow-y-scroll flex-col gap-6 ">
-      <div className="w-full">
-        <h1 className="font-medium text-[#213F7D] text-2xl">Users</h1>
+    <div className="users-page">
+      <div className="users-header">
+        <h1>Users</h1>
       </div>
-      <div className="w-full grid lg:grid-cols-4 xs:grid-cols-2 gap-5">
+      <div className="extra-grid">
         <Extra img="/icons/all-users.svg" title="users" value="2,453" />
         <Extra
           img="/icons/active-users.svg"
@@ -142,19 +143,10 @@ const Users = () => {
                 >
                   {header}
                   <Popover>
-                    <PopoverButton
-                      className={"outline-none w-3 h-3 cursor-pointer"}
-                    >
-                      <img
-                        src="/icons/filter.svg"
-                        className="w-3 h-3 mt-0.5"
-                        alt="filter icon"
-                      />
+                    <PopoverButton className={"filter-button"}>
+                      <img src="/icons/filter.svg" alt="filter icon" />
                     </PopoverButton>
-                    <PopoverPanel
-                      anchor="bottom"
-                      className="flex flex-col gap-4 items-center py-6 justify-center z-10 mt-2 w-[270px] rounded-lg bg-[#fff] border border-[#545F7D0A] transition duration-200 ease-in-out"
-                    >
+                    <PopoverPanel anchor="bottom" className="filter-panel">
                       <Dropdown
                         label="Organization"
                         options={[
@@ -240,7 +232,7 @@ const Users = () => {
                           })
                         }
                       />
-                      <div className="flex items-center gap-2 w-[230px]">
+                      <div className="filter-actions">
                         <Button onClick={resetFilter} variant="outlined">
                           Reset
                         </Button>
@@ -274,31 +266,19 @@ const Users = () => {
               </TableColumn>
               <TableColumn>
                 <Popover>
-                  <PopoverButton
-                    className={"more-button outline-none cursor-pointer"}
-                  >
+                  <PopoverButton className={"more-button"}>
                     <HiOutlineDotsVertical />
                   </PopoverButton>
-                  <PopoverPanel
-                    anchor="bottom end"
-                    className="absolute flex flex-col items-center justify-center z-10 mt-2 right-0 w-[180px] h-[130px] rounded-lg bg-[#fff] p-2 border border-[#545F7D0A] transition duration-200 ease-in-out"
-                  >
-                    <button
-                      className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
-                      onClick={() => navigate(`/users/${user.id}`)}
-                    >
+                  <PopoverPanel anchor="bottom end" className="actions-panel">
+                    <button onClick={() => navigate(`/users/${user.id}`)}>
                       <img src="/icons/eye.svg" alt="eye icon" />
                       View Details
                     </button>
-                    <div
-                      className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
-                    >
+                    <div>
                       <img src="/icons/blacklist.svg" alt="eye icon" />
                       Blacklist User
                     </div>
-                    <div
-                      className={`flex py-1.5 hover:bg-[#FBFBFB] rounded-sm w-full text-[#545F7D] font-medium text-sm justify-center items-center gap-2 cursor-pointer`}
-                    >
+                    <div>
                       <img src="/icons/activate.svg" alt="eye icon" />
                       Activate User
                     </div>
@@ -316,7 +296,7 @@ const Users = () => {
         onChangePage={setCurrentPage}
         onChangeEntriesPerPage={(value) => {
           setEntriesPerPage(value);
-          setCurrentPage(1); // Reset to first page
+          setCurrentPage(1);
         }}
       />
     </div>

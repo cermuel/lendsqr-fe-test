@@ -162,6 +162,10 @@
     display: flex;
     flex-direction: column;
     gap: 1.75rem;
+    overflow-x: scroll;
+    @media screen and (max-width: 768px) {
+      min-height: 60vh;
+    }
 
     h1 {
       font-weight: 500;

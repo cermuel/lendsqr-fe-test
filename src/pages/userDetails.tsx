@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Button from "../components/shared/button";
-import Seperator from "../components/ui/seperator";
+import Seperator from "../components/ui/user/seperator";
 
 import users from "../data/data.json";
-import Detail from "../components/ui/detail";
+import Detail from "../components/ui/user/detail";
 
 import { formatNaira } from "../utils/helpers";
 

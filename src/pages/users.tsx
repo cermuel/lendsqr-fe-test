@@ -8,14 +8,14 @@ import {
 } from "../components/shared/table";
 import users from "../data/data.json";
 import { formatDateTime } from "../utils/helpers";
-import Paginator from "../components/ui/paginator";
+import Paginator from "../components/ui/user/paginator";
 import { useState } from "react";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import { Dropdown } from "../components/ui/dropdown";
-import FilterInput from "../components/ui/input-filter";
+import { Dropdown } from "../components/ui/user/dropdown";
+import FilterInput from "../components/ui/user/input-filter";
 import Button from "../components/shared/button";
 import { useNavigate } from "react-router-dom";
-import Extra from "../components/ui/extra";
+import Extra from "../components/ui/user/extra";
 import "../styles/pages/users.scss";
 
 const headers = [
@@ -26,20 +26,22 @@ const headers = [
   "date joined",
   "status",
 ];
+
+const initialFilters = {
+  organization: "",
+  username: "",
+  email: "",
+  date: "",
+  phoneNumber: 0,
+  status: "",
+};
 const Users = () => {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(100);
 
-  const [filterDrafts, setFilterDrafts] = useState({
-    organization: "",
-    username: "",
-    email: "",
-    date: "",
-    phoneNumber: 0,
-    status: "",
-  });
+  const [filterDrafts, setFilterDrafts] = useState(initialFilters);
 
   const [filters, setFilters] = useState({
     organization: "",
@@ -51,22 +53,8 @@ const Users = () => {
   });
 
   const resetFilter = () => {
-    setFilterDrafts({
-      organization: "",
-      username: "",
-      email: "",
-      date: "",
-      phoneNumber: 0,
-      status: "",
-    });
-    setFilters({
-      organization: "",
-      username: "",
-      email: "",
-      date: "",
-      phoneNumber: 0,
-      status: "",
-    });
+    setFilterDrafts(initialFilters);
+    setFilters(initialFilters);
   };
   const totalEntries = users.length;
 

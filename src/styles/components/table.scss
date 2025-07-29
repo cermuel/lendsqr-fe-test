@@ -2,11 +2,11 @@
   background: #ffffff;
   box-shadow: 3px 5px 20px 0px #0000000a;
   border: 1px solid #213f7d0f;
-
+  border-radius: 4px;
   overflow-x: auto;
   font-family: "Inter", sans-serif;
   padding: 1rem;
-  border-radius: 4px;
+  max-height: 80dvh;
 }
 
 table {

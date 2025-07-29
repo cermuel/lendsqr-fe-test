@@ -15,6 +15,7 @@ import { Dropdown } from "../components/ui/dropdown";
 import FilterInput from "../components/ui/input-filter";
 import Button from "../components/shared/button";
 import { useNavigate } from "react-router-dom";
+import Extra from "../components/ui/extra";
 
 const headers = [
   "Organization",
@@ -107,9 +108,27 @@ const Users = () => {
     currentPage * entriesPerPage
   );
   return (
-    <div className="w-full h-full flex flex-col gap-6 ">
+    <div className="w-full h-max flex overflow-y-scroll flex-col gap-6 ">
       <div className="w-full">
         <h1 className="font-medium text-[#213F7D] text-2xl">Users</h1>
+      </div>
+      <div className="w-full grid lg:grid-cols-4 xs:grid-cols-2 gap-5">
+        <Extra img="/icons/all-users.svg" title="users" value="2,453" />
+        <Extra
+          img="/icons/active-users.svg"
+          title="active users"
+          value="2,453"
+        />
+        <Extra
+          img="/icons/loan-users.svg"
+          title="Users with Loans"
+          value="12,453"
+        />
+        <Extra
+          img="/icons/saving-users.svg"
+          title="Users with savings"
+          value="102,453"
+        />
       </div>
       <Table>
         <TableHead>

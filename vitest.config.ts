@@ -2,6 +2,9 @@ import { defineConfig, configDefaults } from "vitest/config";
 
 export default defineConfig({
   test: {
+    deps: {
+      inline: ["element-plus"],
+    },
     globals: true,
     environment: "jsdom",
     css: true,

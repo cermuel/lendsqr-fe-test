@@ -33,9 +33,9 @@ describe("Input Component", () => {
     expect(toggle).toBeInTheDocument();
 
     fireEvent.click(toggle);
-    expect(screen.getByPlaceholderText("Password").type).toBe("text");
+    expect(input.type).toBe("text");
 
     fireEvent.click(screen.getByText("Hide"));
-    expect(screen.getByPlaceholderText("Password").type).toBe("password");
+    expect(input.type).toBe("password");
   });
 });

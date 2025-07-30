@@ -8,6 +8,11 @@
   transition: background 0.2s ease, color 0.2s ease;
   cursor: pointer;
 
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
   &--default {
     background-color: #39cdcc;
     border-color: #39cdcc;

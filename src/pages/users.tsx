@@ -8,14 +8,14 @@ import {
 } from "../components/shared/table";
 import users from "../data/data.json";
 import { formatDateTime } from "../utils/helpers";
-import Paginator from "../components/ui/user/paginator";
+import Paginator from "../components/ui/paginator";
 import { useState } from "react";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
-import { Dropdown } from "../components/ui/user/dropdown";
-import FilterInput from "../components/ui/user/input-filter";
+import { Dropdown } from "../components/ui/dropdown";
+import FilterInput from "../components/ui/input-filter";
 import Button from "../components/shared/button";
 import { useNavigate } from "react-router-dom";
-import Extra from "../components/ui/user/extra";
+import Extra from "../components/ui/extra";
 import "../styles/pages/users.scss";
 
 const headers = [
@@ -32,7 +32,7 @@ const initialFilters = {
   username: "",
   email: "",
   date: "",
-  phoneNumber: 0,
+  phoneNumber: "",
   status: "",
 };
 const Users = () => {
@@ -43,14 +43,7 @@ const Users = () => {
 
   const [filterDrafts, setFilterDrafts] = useState(initialFilters);
 
-  const [filters, setFilters] = useState({
-    organization: "",
-    username: "",
-    email: "",
-    date: "",
-    phoneNumber: 0,
-    status: "",
-  });
+  const [filters, setFilters] = useState(initialFilters);
 
   const resetFilter = () => {
     setFilterDrafts(initialFilters);
@@ -73,7 +66,7 @@ const Users = () => {
       ? user.email.toLowerCase().includes(filters.email.toLowerCase())
       : true;
     const matchPhone = filters.phoneNumber
-      ? user.phoneNumber.toString().includes(filters.phoneNumber.toString())
+      ? user.phoneNumber.toString().includes(filters.phoneNumber)
       : true;
     const matchDate = filters.date
       ? new Date(user.dateJoined).toISOString().slice(0, 10) === filters.date
@@ -193,7 +186,7 @@ const Users = () => {
                         onChange={(e) => {
                           setFilterDrafts({
                             ...filterDrafts,
-                            phoneNumber: Number(e.target.value),
+                            phoneNumber: e.target.value,
                           });
                         }}
                         placeholder="Phone Number"

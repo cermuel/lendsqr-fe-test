@@ -3,12 +3,14 @@ import Button from "../components/shared/button";
 import Input from "../components/shared/input";
 import "../styles/pages/login.scss";
 import { login } from "../services/slices/userSlice";
+import { useState } from "react";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
 
   const handleLogin = () => {
-    dispatch(login({ email: "" }));
+    dispatch(login({ email }));
   };
 
   return (
@@ -29,10 +31,18 @@ const Login = () => {
             <div className="login__header">Welcome!</div>
             <div className="login__header2">Enter details to login.</div>
           </div>
-          <Input placeholder="Email" type="email" />
+          <Input
+            placeholder="Email"
+            type="email"
+            onChange={({ target }) => setEmail(target.value)}
+          />
           <Input placeholder="Password" type="password" />
           <span className="login__span">FORGOT PASSWORD?</span>
-          <Button onClick={handleLogin} style={{ height: 48 }}>
+          <Button
+            disabled={!email}
+            onClick={handleLogin}
+            style={{ height: 48 }}
+          >
             LOG IN
           </Button>
         </div>

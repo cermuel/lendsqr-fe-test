@@ -16,7 +16,12 @@ const Sidebar = ({ isOpen, onClose }: Props) => {
   return (
     <aside className={`sidebar ${isOpen ? "open" : ""}`}>
       <div className="sidebar__header">
-        <div className="mobileClose" onClick={onClose}>
+        <div
+          className="mobileClose"
+          onClick={onClose}
+          aria-label="Close sidebar"
+          role="button"
+        >
           <VscClose size={20} color="#213f7d" />
         </div>
         <img src="/images/logo.svg" className="sidebar__logo" alt="logo" />
